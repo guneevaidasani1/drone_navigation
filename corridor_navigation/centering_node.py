@@ -1,0 +1,1 @@
+## idea is to keep distance of drone from left wall same as the distance to right wall
