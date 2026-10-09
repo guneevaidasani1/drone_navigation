@@ -53,3 +53,16 @@ class NodeCenter(Node):
         cmd.twist.linear.x = 0.3
         cmd.twist.linear.y = velocity
         self.vel_pub.publish(cmd)
+
+def main(args = None):
+    rclpy.init(args = args)
+    node = NodeCenter()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass 
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+
