@@ -27,8 +27,8 @@ class NodeCenter(Node):
 
         total_beams = len(msg.ranges)
 
-        left_index = int(total_beams * 0.25)
-        right_index = int(total_beams * 0.75)
+        right_index = int(total_beams * 0.25)
+        left_index = int(total_beams * 0.75)
 
         left_distance = msg.ranges[left_index]
         right_distance = msg.ranges[right_index]
@@ -39,7 +39,7 @@ class NodeCenter(Node):
             right_distance = 1.0
 
         gain = 0.5
-        error_total = right_distance - left_distance
+        error_total = left_distance - right_distance
         velocity = gain * error_total
 
         velocity = max(min(velocity , 0.5),-0.5)

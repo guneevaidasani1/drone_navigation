@@ -1,50 +1,117 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <sdf version="1.8">
   <world name="corridor_world">
-    <!-- Sun Lighting -->
+
+    <!-- Gazebo Systems -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- Environment Lighting & Floor -->
     <include>
-      <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/Sun</uri>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
     </include>
 
-    <!-- Ground Plane -->
     <include>
-      <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/Ground Plane</uri>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground%20Plane</uri>
     </include>
 
-    <!-- Left Wall -->
+    <!-- Physics Parameters -->
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <include>
+  	<uri>model://iris_with_ardupilot</uri>
+  	<pose>0 0 0.1 0 0 0</pose>
+	</include>
+
+    <!-- Left Wall (Red) -->
     <model name="left_wall">
       <static>true</static>
-      <pose>0 2.0 1.0 0 0 0</pose>
+      <pose>0 1.9 1.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>10.0 0.2 2.0</size></box></geometry>
+          <geometry>
+            <box>
+              <size>16.0 0.2 2.0</size>
+            </box>
+          </geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>10.0 0.2 2.0</size></box></geometry>
+          <geometry>
+            <box>
+              <size>16.0 0.2 2.0</size>
+            </box>
+          </geometry>
           <material>
-            <ambient>0.8 0.2 0.2 1</ambient>
-            <diffuse>0.8 0.2 0.2 1</diffuse>
+            <ambient>0.8 0.15 0.15 1</ambient>
+            <diffuse>0.8 0.15 0.15 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <!-- Right Wall -->
+    <!-- Right Wall (Blue) -->
     <model name="right_wall">
       <static>true</static>
-      <pose>0 -2.0 1.0 0 0 0</pose>
+      <pose>0 -1.9 1.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>10.0 0.2 2.0</size></box></geometry>
+          <geometry>
+            <box>
+              <size>16.0 0.2 2.0</size>
+            </box>
+          </geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>10.0 0.2 2.0</size></box></geometry>
+          <geometry>
+            <box>
+              <size>16.0 0.2 2.0</size>
+            </box>
+          </geometry>
           <material>
-            <ambient>0.2 0.2 0.8 1</ambient>
-            <diffuse>0.2 0.2 0.8 1</diffuse>
+            <ambient>0.15 0.2 0.8 1</ambient>
+            <diffuse>0.15 0.2 0.8 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
+
+    <!-- End Wall (Yellow) -->
+    <model name="end_wall">
+      <static>true</static>
+      <pose>8.1 0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 4.0 2.0</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 4.0 2.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.9 0.8 0.1 1</ambient>
+            <diffuse>0.9 0.8 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
   </world>
 </sdf>
